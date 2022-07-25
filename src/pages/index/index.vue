@@ -1,21 +1,25 @@
 <script lang="ts">
-import Vue from 'vue';
+import { ref } from '@vue/composition-api';
+import { onLoad } from 'uni-composition-api';
+import MyButton from '@/components/MyButton.vue';
 
-export default Vue.extend({
-  data() {
-    return {
-      title: 'Hello',
-    };
-  },
-  onLoad() {},
-  methods: {},
+export default {
+  components: { MyButton },
+};
+</script>
+<script setup lang="ts">
+onLoad(() => {
+  console.log('page load');
 });
+const title = 'Hello';
+const count = ref(0);
 </script>
 <template>
   <view class="content">
     <image class="logo" src="../../static/logo.png"></image>
     <view>
       <text class="title">{{ title }}</text>
+      <MyButton :message="`count is ` + count" @btn-click="count = count + 1" />
     </view>
   </view>
 </template>
